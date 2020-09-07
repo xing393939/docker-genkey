@@ -16,11 +16,11 @@ spec:
         app: genkey
     spec:
       containers:
-        - image: xing393939/genkey
-          name: genkey
+        - image: xing393939/docker-genkey
+          name: container-genkey
           ports:
             - containerPort: 80
-              name: pod-genkey
+              name: container-genkey
               protocol: TCP
 
 ---
