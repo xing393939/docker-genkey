@@ -1,17 +1,9 @@
 FROM python:3.6.12
-# Install software-properties-common
-RUN apt-get update && apt-get install -y \
-    software-properties-common
-
-# Add the "JAVA" ppa
-RUN add-apt-repository -y \
-    ppa:webupd8team/java
-
-# Install OpenJDK-8
 RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk && \
-    apt-get install -y ant && \
-    apt-get clean;
+    DEBIAN_FRONTEND=noninteractive \
+    apt-get -y install default-jre-headless && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
     
 WORKDIR /project
 ADD . /project
