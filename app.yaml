@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-genkey
+  namespace: xing393939
+  labels:
+    app: genkey
+spec:
+  selector:
+    matchLabels:
+      app: genkey
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: genkey
+    spec:
+      containers:
+        - image: xing393939/genkey
+          name: genkey
+          ports:
+            - containerPort: 80
+              name: pod-genkey
+              protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-genkey
+  namespace: xing393939
+  labels:
+    app: genkey
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: service-genkey
