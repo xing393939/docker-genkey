@@ -43,7 +43,7 @@ def genkey():
 		common, shell=True, stdout=subprocess.PIPE,
 		stderr=subprocess.STDOUT).communicate()
 	html = name
-	html += "<pre>{0}</pre><pre>{1}</pre><a href='/{2}'>download</a>".format(common, info[0], keystore)
+	html += '<pre>%s</pre><pre>%s</pre><a href="/%s">download</a>' % (common, info[0].decode('utf-8'), keystore)
 	html += "<pre>keyAlias '{1}'\nkeyPassword '{0}'\nstoreFile file('{2}')\nstorePassword '{0}'</pre>".format(
 		keypass, alias, keystore[7:])
 	return html
