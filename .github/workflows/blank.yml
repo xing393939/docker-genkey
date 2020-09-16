@@ -1,0 +1,22 @@
+# This workflows will upload a Python Package using Twine when a release is created
+# For more information see: https://help.github.com/en/actions/language-and-framework-guides/using-python-with-github-actions#publishing-to-package-registries
+
+name: Python Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Login Registry
+        run: echo ${{ secrets.PERSONAL_TOKEN }} | docker login -u scdddk@163.com registry.cn-qingdao.aliyuncs.com --password-stdin
+      - name: Build the tagged Docker image
+        run: docker build . --file Dockerfile --tag registry.cn-qingdao.aliyuncs.com/qinhan/simida:genkey
+      - name: Push the tagged Docker image
+        run: docker push registry.cn-qingdao.aliyuncs.com/qinhan/simida:genkey
