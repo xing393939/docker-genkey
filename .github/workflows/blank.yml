@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout
+        uses: actions/checkout@v1
       - name: Login Registry
         run: echo ${{ secrets.PERSONAL_TOKEN }} | docker login -u scdddk@163.com registry.cn-qingdao.aliyuncs.com --password-stdin
       - name: Build the tagged Docker image
